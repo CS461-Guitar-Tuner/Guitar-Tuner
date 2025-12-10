@@ -11,4 +11,5 @@
 - [Issues](issues.md)
 - [Ethics](ethics.md)
 - [Accessibility](accessibility.md)
+- [Material](Material.md)
 - [References](references.md)
