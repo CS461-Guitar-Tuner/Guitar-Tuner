@@ -168,11 +168,8 @@ void setup() {
   oled.setTextSize(1);
   oled.setTextColor(0xFFFF);
   oled.setCursor(2, 10);
-  //oled.print("Tuner ready");
   oled.setCursor(2, 25);
-  //oled.print("Target: ");
-  //oled.print(strings[currentStringIndex].name);
-  //oled.print("Guitar tuner ready"); ??? 
+  
 }
 
 /*========================================================================================================================================================*/
@@ -216,8 +213,6 @@ void loop() {
       break;
 
     case NORMAL: //MODE ONE: NORMAL STATE
-        //digitalWrite(LED_BUILTIN, HIGH);
-
         normal();
         
         if (CircuitPlayground.leftButton()){
@@ -240,7 +235,7 @@ void loop() {
         }
       break;
   }
-  if (onOff()){ //Left button is held for 5 sec, it turns off. 
+  if (onOff()){ //hold both buttons to turn 
           next_state = OFF;
   }if (state != next_state) {
     oled.fillScreen(0x0000);
@@ -252,7 +247,6 @@ void loop() {
 /*========================================================================================================================================================*/
 /*=======================================================================================================================================================*/
 /*5 ACTUAL HELPER FUNCTIONS, IN ORDER OF PROTOTYPE APPEARANCE*/
-
 bool onOff(){
   if(CircuitPlayground.leftButton() && CircuitPlayground.rightButton()){
     return true;
@@ -260,11 +254,7 @@ bool onOff(){
     return false;
   }
 }
-
-
  /*-----------------------PITCH/FREQUENCY MATH FUNCTIONS---------------------------------------------------------*/
-
-
 float measureFrequency() {
   // 1) Collect samples and measure sample rate
   unsigned long start = micros(); //take the first time measurement
@@ -285,7 +275,7 @@ float measureFrequency() {
   float mean = sum / (float)N_SAMPLES; //mean is where the zero lies 
   double energy = 0.0; //reminder about what energy 
   for (int i = 0; i < N_SAMPLES; i++) {
-    float v = samples[i] - mean;
+    float v = samples[i] - mean;DC
     samples[i] = (int16_t)v;
     energy += v * v;
   }
@@ -319,30 +309,22 @@ float measureFrequency() {
       bestLag = lag;
     }
   }
- 
   if (bestLag <= 0) return 0.0;
- 
   float freq = sampleRate / bestLag;
   return freq;
 }
- 
 float centsOff(float measured, float target) {
   return 1200.0 * log(measured / target) / log(2.0);
 }
- 
 const char* tuningStatus(float cents) {
   if (fabs(cents) < 5.0)  return "IN TUNE";
   if (cents < 0)          return "FLAT";
   return "SHARP";
 }
-
-
 /*-----------------------OLED DRAWING HELPERS---------------------------------------------------------*/
 void drawNoSignal() {
   oled.fillScreen(0x0000);
 
-  // Top line: "No signal"
-  //(&TomThumb);
   oled.setTextSize(1);
   oled.setTextColor(0xFFFF);
   oled.setCursor(2, 10);
@@ -350,7 +332,6 @@ void drawNoSignal() {
 
   // Big target note in center
   oled.fillRect(0, 16, 96, 32, 0x0000);
-  //oled.setFont(&TomThumb);
   oled.setTextSize(2);
   oled.setTextColor(0xF800);   // red
   oled.setCursor(10, 40);
@@ -358,7 +339,6 @@ void drawNoSignal() {
 
   // Bottom hint
   oled.fillRect(0, 48, 96, 16, 0x0000);
-  //oled.setFont(&TomThumb);
   oled.setTextSize(1);
   oled.setTextColor(0x07E0);
   oled.setCursor(2, 58);
@@ -374,7 +354,6 @@ void drawNoSignal() {
 void drawTuningScreen(const char* noteName, int hzRounded, int centsRounded, const char* status) {
   // Top: frequency
   oled.fillRect(0, 0, 96, 16, 0x0000);
-  //oled.setFont(&TomThumb);
   oled.setTextSize(1);
   oled.setCursor(2, 10);
   oled.setTextColor(0x07E0); // green-ish
@@ -384,7 +363,6 @@ void drawTuningScreen(const char* noteName, int hzRounded, int centsRounded, con
 
   // Middle: big note
   oled.fillRect(0, 16, 96, 32, 0x0000);
-  //oled.setFont(&TomThumb);
   oled.setTextSize(2);
   oled.setCursor(10, 40);
   oled.setTextColor(0xF800);
@@ -403,7 +381,6 @@ void drawCurrentNoteScreen() { //used in fork
   oled.fillScreen(0x0000);
 
   // Top: mode label
-  //oled.setFont(&TomThumb);
   oled.setTextSize(1);
   oled.setTextColor(0xFFFF);
   oled.setCursor(2, 10);
@@ -465,7 +442,6 @@ void sendMotorCommand(float cents) {
     digitalWrite(MOTOR_EN_PIN, LOW);   // stop motor
     return;
   }
-
   bool tighten = (cents < 0);  // FLAT => tighten, SHARP => loosen
   digitalWrite(MOTOR_DIR_PIN, tighten ? HIGH : LOW);
   digitalWrite(MOTOR_EN_PIN, HIGH);
@@ -479,8 +455,6 @@ void sendMotorCommand(float cents) {
 void normal() {
   //bool firstTime = true;
   handleRightButton();
-  
-  
   
   float hz = measureFrequency();
   unsigned long now = millis();
@@ -496,7 +470,6 @@ void normal() {
 
     const char* status = tuningStatus(cents);
     bool inTune = (fabs(cents) < IN_TUNE_CENTS);
-
     int hzRounded    = (int)(hz + 0.5);
     int centsRounded = (int)(cents + (cents >= 0 ? 0.5 : -0.5));
 
@@ -505,7 +478,6 @@ void normal() {
 
     bool changed = true; 
     if (changed) {
-
       drawTuningScreen(target.name, hzRounded, centsRounded, status);
 
       strcpy(lastNoteName, target.name);
@@ -535,7 +507,6 @@ void normal() {
   }
   firstTime = false; 
 }
-
 void motor() {
   handleRightButton();
 
@@ -608,8 +579,6 @@ void fork() {
     }
     delay(200);
   }
-
-
   playCurrentNotePulse();
 }
 void Title_Screen() {
@@ -620,7 +589,6 @@ void Title_Screen() {
   oled.print("Press L to Select Mode");
 }
 void Selection_Mode() {
-  
   const char* modes[3] = {"Normal Mode", "Fork Mode", "Motor Mode"}; // FOR SELECTED MODE: normal mode = 0 Fork Mode =1 Motor Mode = 2 (could turn into enum)
 
   oled.setCursor(2, 10);
@@ -636,7 +604,6 @@ void Selection_Mode() {
     } else {
       oled.setTextColor(0xFFFF, 0x0000); 
     }
-
     oled.print(modes[i]);
   }
 }
