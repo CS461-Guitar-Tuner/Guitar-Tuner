@@ -1,30 +1,78 @@
-# Team Work Schedule 
+# Team Work Schedule
 
-Week 8: Wait for materials to arrive, preemptively read datasheets, assemble the board. 
-Week 9 & 10: Detect the correct tone, have a fully functional display, make the motor turn the tuning peg. Occasional check-ins to ensure that everything is going smoothly.
-Week 11: Test and debug.
-Week 12: Prepare demo, write report, prepare presentation
-Who in your team is going to tackle what (tasks)?
-Assemble the board 
-Figure out how to connect each part by reading datasheets and pinouts
-Determine the correct voltages that all components need
-Determine which resistors are needed where to achieve each target voltage
-Detect the correct tone
-Microphone reads in signal to circuit playground
-Get the circuit playground to detect which pitch the user is trying to tune to 
-Have the circuit playground determine if current pitch is low or flat
-Have the circuit playground communicate this with serialport on laptop for initial proof of concept, with final goal being a read-out on the display 
-Have a fully functional display 
-Edy will focus on tackling UI stuff and consequently take care of programming stuff for the OLED display.
-Add color to show how close the tone is
-Show battery life
-Shows the pitch
-Having an motor tuning system 
+---
 
-Getting the motor to turn automatically based on pitch (Gerson)
-Gerson and Charlie will sync the motor to the relative pitch of the strings
-Figure out a way to turn on the motor (by holding button or directly through the mic)
+##  Weekly Timeline
 
-Testing
-Charlie is going to bring his guitar and a different tuner with him in order to detect if the pitch is correct
-Test pitch accuracy across different pitches (does it do well for higher or lower pitches?)
+### **Week 8**
+- Wait for materials to arrive  
+- Preemptively read datasheets and pinouts  
+- Assemble the circuit board  
+
+### **Weeks 9–10**
+- Detect the correct tone  
+- Implement a fully functional display  
+- Make the motor turn the tuning peg  
+- Occasional check-ins to ensure steady progress  
+
+### **Week 11**
+- System testing and debugging  
+
+### **Week 12**
+- Prepare final demo  
+- Write project report  
+- Prepare presentation  
+
+---
+
+## Task Breakdown by Responsibility
+
+### **Board Assembly & Hardware Setup**
+- Assemble the board  
+- Determine how to connect each component by reading datasheets and pinouts  
+- Identify correct operating voltages for all components  
+- Determine required resistors to achieve target voltages  
+
+---
+
+### **Tone Detection & Signal Processing**
+- Detect the correct tone from the guitar string  
+- Read microphone input into the Circuit Playground  
+- Detect which pitch the user is attempting to tune to  
+- Determine whether the current pitch is sharp or flat  
+- Communicate pitch information via Serial Port to a laptop as an initial proof of concept  
+- Final goal: display pitch information directly on the OLED  
+
+---
+
+### **Display / UI Development (OLED)**
+**Edy**
+
+- Program and manage the OLED display  
+- Display the detected pitch  
+- Use color to indicate how close the tone is to being in tune  
+- Show battery life status  
+
+---
+
+### **Motorized Tuning System**
+**Gerson & Charlie**
+
+- Automatically turn the motor based on detected pitch (Gerson)  
+- Synchronize motor movement to the relative pitch of each string  
+- Design a method to activate the motor  
+  - Holding a button  
+  - Automatic activation via microphone input  
+
+---
+
+### **Testing & Validation**
+**Charlie**
+
+- Bring a guitar and a commercial tuner for reference  
+- Verify pitch accuracy against a known-good tuner  
+- Test accuracy across different pitch ranges  
+  - Lower strings  
+  - Higher strings  
+
+
