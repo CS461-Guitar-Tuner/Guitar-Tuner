@@ -211,6 +211,13 @@ const char* tuningStatus(float cents) {
   return "SHARP";
 }
 ```
+In addition to the RMS noise gate, the tuner ignores detected pitches that are too far from the selected string’s target. Two thresholds are used.
+```cpp
+const float IN_TUNE_CENTS = 20.0;
+const float MAX_DEVIATION_CENTS = 80.0;
+```
+
+If the absolute cents error exceeds MAX_DEVIATION_CENTS, the reading is discarded. This prevents background noise, adjacent strings, or unrelated sounds from affecting the display or driving the motor.
 
 ---
 
