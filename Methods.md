@@ -149,7 +149,7 @@ The microphone signal is sampled `N_SAMPLES` times using `analogRead()`. The tot
 
 ```cpp
 float measureFrequency() {
-  // 1) Collect samples and measure sample rate
+  //  Collect samples and measure sample rate
   unsigned long start = micros(); //take the first time measurement
   for (int i = 0; i < N_SAMPLES; i++) {
     samples[i] = analogRead(MIC_PIN);
@@ -160,7 +160,7 @@ float measureFrequency() {
   if (totalTimeSec <= 0) return 0.0; //mostly a worry if the timer is wrapping around-- just in case
   float sampleRate = N_SAMPLES / totalTimeSec; //gives us samples per second to be used in frequency calc 
  
-  // 2) Remove DC offset and measure signal energy (centering the signal at zero)
+  //  Remove DC offset and measure signal energy (centering the signal at zero)
   long sum = 0;
   for (int i = 0; i < N_SAMPLES; i++) {
     sum += samples[i]; //tallying up all of the samples so... 
@@ -179,7 +179,7 @@ float measureFrequency() {
     return 0.0;
   }
  
-  // 3) Difference function in guitar range
+  // Difference function in guitar range
   int minLag = (int)(sampleRate / 500.0); // ~500 Hz upper bound
   int maxLag = (int)(sampleRate / 60.0);  // ~60 Hz lower bound
  
