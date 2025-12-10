@@ -89,7 +89,7 @@ The Bluefruit reads direction and enable signals and converts them into PWM outp
 ### Circuit Playground Bluefruit
 - `Adafruit_TinyUSB.h` — USB and serial support
 
-Adafruit examples were referenced for OLED setup and hardware initialization. All pitch detection logic, state machine design, and motor automation were implemented by our team.
+Adafruit examples were referenced for OLED setup and hardware initialization. 
 
 ---
 
