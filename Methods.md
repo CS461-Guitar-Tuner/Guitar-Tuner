@@ -9,7 +9,7 @@ This section describes how the guitar tuner was implemented, including the hardw
 The system is split across two microcontrollers:
 
 - **Adafruit Circuit Playground Classic (CPC)** — main controller  
-- **Adafruit Circuit Playground Bluefruit (CPB)** — motor control slave
+- **Adafruit Circuit Playground Bluefruit (CPB)** — motor control
 
 This separation was intentional. The Classic handles time-sensitive audio sampling, pitch detection, user interface logic, and display updates. The Bluefruit handles motor control and PWM generation, isolating high-current motor behavior from audio processing.
 
