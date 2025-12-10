@@ -45,10 +45,11 @@ A brief guide into our project journey.
 ## Project Pages
 
 - [Introduction](introduction.md)
+- [Methods](Methods.md)
 - [Results](results.md)
 - [Schedule](schedule.md)
 - [Issues](issues.md)
 - [Ethics](ethics.md)
 - [Accessibility](accessibility.md)
-- [Materials](Material.html)
+- [code](code.ino)
 - [References](references.md)
