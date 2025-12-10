@@ -18,12 +18,12 @@ A brief guide into our project journey.
 <table class="team-table">
   <tr>
     <td align="center">
-      <img src="assets/images/gerson.jpg" alt="Gerson" />
+      <img src="assets/images/Gerson.jpg" alt="Gerson" />
       <br />
       <strong>Gerson</strong>
     </td>
     <td align="center">
-      <img src="assets/images/charlie.jpg" alt="Charlie" />
+      <img src="assets/images/Charlie.jpg" alt="Charlie" />
       <br />
       <strong>Charlie</strong>
     </td>
