@@ -1,4 +1,5 @@
-##Intro##
+# Intro
+
 The goal is to build a guitar tuner. It will have to sense the vibrations of the instrument and through a ui provide feedback on how the guitar player should tune the string, higher or lower. Additionally, we also think it would be cool if it mechanically twisted the tuning knob to tune it or if it emitted a ‘target tone’ to guide the individual tuning the guitar. 
 Why (motivation)?
 As musicians we wanted an idea that incorporated music with computer science. We believed that a guitar tuner was the project for the job. We want something that can be used in daily life and is small and compact.
