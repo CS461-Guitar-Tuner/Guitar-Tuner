@@ -40,10 +40,10 @@ A brief guide into our project journey.
 ## Project Pages
 
 - [Introduction](introduction.md)
+- [Materials](Material.md)
 - [Results](results.md)
 - [Schedule](schedule.md)
 - [Issues](issues.md)
 - [Ethics](ethics.md)
 - [Accessibility](accessibility.md)
-- [Materials](Material.html)
 - [References](references.md)
