@@ -1,108 +1,243 @@
 # Methods
 
-This section describes how the guitar tuner was implemented, including the hardware configuration, software architecture, pitch detection logic, user interface design, and motor automation system. The goal of this section is to provide enough detail that another person could reproduce the prototype using the same or similar components.
+This section describes how the guitar tuner was implemented, including hardware configuration, software architecture, pitch detection logic, user interaction, and motor automation. The goal is to clearly explain both what the system does and how it does it, so that another person could reproduce the prototype using this document.
 
 ---
 
 ## Hardware Overview and System Architecture
 
-The system is split across two microcontrollers:
+The system uses two microcontrollers:
 
-- **Adafruit Circuit Playground Classic (CPC)** — main controller  
-- **Adafruit Circuit Playground Bluefruit (CPB)** — motor control
+- **Adafruit Circuit Playground Classic (CPC)** — main controller
+- **Adafruit Circuit Playground Bluefruit (CPB)** — motor controller
 
-This separation was intentional. The Classic handles time-sensitive audio sampling, pitch detection, user interface logic, and display updates. The Bluefruit handles motor control and PWM generation, isolating high-current motor behavior from audio processing.
+The Classic handles microphone sampling, pitch detection, OLED display output, button input, and audio feedback. The Bluefruit is dedicated to controlling the tuning motor using PWM. This split prevents motor noise and timing issues from interfering with audio processing.
 
 ---
 
 ## Pin Assignments and Wiring
 
-### Circuit Playground Classic (Main Controller)
+### Circuit Playground Classic
 
-**Audio Input**
-- External electret microphone connected to:
-  - `MIC_PIN = A4`
+The external electret microphone is connected to analog pin A4:
 
-**OLED Display (SSD1331, SPI)**
-- `OLED_MOSI = 2`
-- `OLED_CLK  = 3`
-- `OLED_CS   = 10`
-- `OLED_DC   = 9`
-- `OLED_RST  = 0`
+```cpp
+const int MIC_PIN = A4;
+```
 
-Communication with the display is handled over SPI using the `Adafruit_SSD1331` and `Adafruit_GFX` libraries.
+The OLED display (SSD1331) is connected via SPI:
 
-**Speaker Output**
-- `SPEAKER_PIN = 1`
-Used to generate confirmation beeps and reference tones via `tone()`.
+```cpp
+#define OLED_MOSI 2
+#define OLED_CLK  3
+#define OLED_CS   10
+#define OLED_DC   9
+#define OLED_RST  0
+```
 
-**Motor Control Signals (to Bluefruit)**
-- `MOTOR_DIR_PIN = 12` — motor direction  
-- `MOTOR_EN_PIN  = 6`  — motor enable/disable  
+The on-board speaker is driven using:
 
-These pins send simple digital signals to the Bluefruit board.
+```cpp
+#define SPEAKER_PIN 1
+```
 
-**User Input**
-- Built-in **left** and **right** buttons on the Circuit Playground:
-  - Right button: cycle strings or modes
-  - Left button: confirm selection, return to menu
-  - Both buttons held: power on/off
+Motor control signals sent to the Bluefruit:
+
+```cpp
+const int MOTOR_DIR_PIN = 12;   // direction
+const int MOTOR_EN_PIN  = 6;    // enable
+```
+
+User interaction uses the built-in left and right buttons:
+- Right button: cycle strings or modes
+- Left button: confirm selection / return
+- Both buttons held: power on/off
 
 ---
 
-### Circuit Playground Bluefruit (Motor Controller)
+### Circuit Playground Bluefruit
 
-**Inputs from Classic**
-- `DIR_IN = A5`
-- `EN_IN  = A6`
+Control inputs from the Classic:
 
-**Motor Driver Outputs**
-- `AIN1 = A1` (PWM)
-- `AIN2 = A2` (PWM)
-- `SLP  = A3` (sleep/enable pin)
+```cpp
+#define DIR_IN A5
+#define EN_IN  A6
+```
 
-The Bluefruit reads direction and enable signals from the Classic and converts them into PWM signals that drive the DC motor through a motor driver board.
+Motor driver outputs:
+
+```cpp
+#define AIN1 A1
+#define AIN2 A2
+#define SLP  A3
+```
+
+The Bluefruit reads direction and enable signals and converts them into PWM outputs that drive the DC motor through a motor driver.
 
 ---
 
 ## Software Libraries Used
 
 ### Circuit Playground Classic
-- `math.h`  
-  Used for signal processing math such as square roots and logarithms for RMS and cents calculations.
-
-- `Adafruit_CircuitPlayground.h`  
-  Simplifies access to buttons, analog inputs, and audio output.
-
-- `SPI.h`  
-  Required for SPI communication with the OLED display.
-
-- `Adafruit_SSD1331.h`  
-  Display driver for the OLED.
-
-- `Adafruit_GFX.h`  
-  Higher-level graphics support for text and drawing primitives.
-
-- `Fonts/TomThumb.h`  
-  A very small bitmap font chosen to conserve flash memory, which is limited on the Classic.
+- `math.h` — RMS calculation and logarithmic cents conversion
+- `Adafruit_CircuitPlayground.h` — microphone, buttons, speaker
+- `SPI.h` — SPI communication
+- `Adafruit_SSD1331.h` — OLED driver
+- `Adafruit_GFX.h` — graphics rendering
+- `Fonts/TomThumb.h` — compact font to reduce memory usage
 
 ### Circuit Playground Bluefruit
-- `Adafruit_TinyUSB.h`  
-  Provides USB and Serial support for debugging. Motor control itself uses only basic GPIO and PWM functionality.
+- `Adafruit_TinyUSB.h` — USB and serial support
 
-We referenced Adafruit example code for OLED initialization and Circuit Playground basics, but all tuning logic, state machines, motor control signaling, and multi-mode behavior were implemented by our team.
+Adafruit examples were referenced for OLED setup and hardware initialization. All pitch detection logic, state machine design, and motor automation were implemented by our team.
 
 ---
 
 ## Guitar String Representation
 
-The six standard guitar strings are stored in a structured array:
+Each guitar string is represented by a name and its target frequency:
 
+```cpp
 struct Note {
   const char* name;
   float freq;
 };
 
+Note strings[] = {
+  {"E2", 82.41},
+  {"A2", 110.00},
+  {"D3", 146.83},
+  {"G3", 196.00},
+  {"B3", 246.94},
+  {"E4", 329.63}
+};
+```
+
+The currently selected string is changed using the right button.
+
+---
+
+## Pitch Detection and Autocorrelation Logic
+
+The tuner uses a **time-domain autocorrelation-style algorithm** to estimate pitch. This approach was chosen because it is more robust than simple zero-crossing methods for guitar signals, which contain harmonics and background noise.
+
+### Sampling Strategy
+
+```cpp
+const int N_SAMPLES = 250;
+int16_t samples[N_SAMPLES];
+```
+
+The microphone signal is sampled `N_SAMPLES` times using `analogRead()`. The total sampling time is measured using `micros()` so the effective sample rate can be calculated dynamically rather than assumed.
+
+### How Autocorrelation Is Used
+
+1. **DC Offset Removal**  
+   The average of all samples is subtracted so the waveform is centered around zero. This prevents bias from affecting pitch estimation.
+
+2. **Noise Rejection (RMS Gate)**  
+   The RMS energy of the signal is computed. If the RMS value is below a threshold, the signal is treated as silence and ignored.
+
+3. **Lag Search (Autocorrelation)**  
+   The algorithm searches over a range of delays (lags) corresponding to roughly 60–500 Hz, which covers the guitar’s frequency range.  
+   For each lag, it computes the sum of squared differences between the signal and a shifted version of itself. The lag with the smallest error represents the signal’s fundamental period.
+
+4. **Frequency Calculation**  
+   Frequency is computed as the sample rate divided by the best lag.
+
+### Autocorrelation Code
+
+```cpp
+float measureFrequency() {
+  unsigned long start = micros();
+  for (int i = 0; i < N_SAMPLES; i++) {
+    samples[i] = analogRead(MIC_PIN);
+  }
+  unsigned long end = micros();
+
+  float sampleRate = N_SAMPLES / ((end - start) / 1000000.0);
+
+  long sum = 0;
+  for (int i = 0; i < N_SAMPLES; i++) sum += samples[i];
+  float mean = sum / (float)N_SAMPLES;
+
+  double energy = 0;
+  for (int i = 0; i < N_SAMPLES; i++) {
+    float v = samples[i] - mean;
+    samples[i] = (int16_t)v;
+    energy += v * v;
+  }
+
+  if (sqrt(energy / N_SAMPLES) < 5.0) return 0.0;
+
+  int minLag = sampleRate / 500.0;
+  int maxLag = sampleRate / 60.0;
+
+  unsigned long bestDiff = 0xFFFFFFFF;
+  int bestLag = -1;
+
+  for (int lag = minLag; lag <= maxLag; lag++) {
+    unsigned long diff = 0;
+    for (int i = 0; i < N_SAMPLES - lag; i++) {
+      int32_t d = samples[i] - samples[i + lag];
+      diff += d * d;
+    }
+    if (diff < bestDiff) {
+      bestDiff = diff;
+      bestLag = lag;
+    }
+  }
+
+  return (bestLag > 0) ? sampleRate / bestLag : 0.0;
+}
+```
+
+---
+
+## Cents Error and Tuning Classification
+
+Pitch error is measured in **cents**, making tuning precision consistent across strings:
+
+```cpp
+float centsOff(float measured, float target) {
+  return 1200.0 * log(measured / target) / log(2.0);
+}
+```
+
+```cpp
+const char* tuningStatus(float cents) {
+  if (fabs(cents) < 5.0)  return "IN TUNE";
+  if (cents < 0)          return "FLAT";
+  return "SHARP";
+}
+```
+
+---
+
+## State Machine and Modes
+
+```cpp
+enum MainState { OFF, WELCOME, SELECT, NORMAL, MOTOR, FORK };
+```
+
+- **Normal Mode:** visual tuner with OLED and audio feedback
+- **Motor Mode:** automatically adjusts tuning peg
+- **Fork Mode:** plays reference tone through speaker
+
+### Motor Automation Logic
+
+```cpp
+void sendMotorCommand(float cents) {
+  if (fabs(cents) < IN_TUNE_CENTS) {
+    digitalWrite(MOTOR_EN_PIN, LOW);
+    return;
+  }
+  digitalWrite(MOTOR_DIR_PIN, (cents < 0) ? HIGH : LOW);
+  digitalWrite(MOTOR_EN_PIN, HIGH);
+}
+```
+
+---
 
 <html lang="en">
 <head>
