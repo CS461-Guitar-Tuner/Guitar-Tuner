@@ -28,6 +28,8 @@ The Circuit Playground Classic has a very limited amount of program storage, whi
 
 To address this, we removed unused fonts, reduced display assets, and eliminated non-essential code paths. These trade-offs allowed us to retain core functionality—pitch detection, display output, and motor control—while staying within the available memory limits.
 
+---
+
 ## Motor Strength
 
 The motor was a component that we wished to use from the start, that being said, one thing that we didn't calculate was how strong our motor eneded to be to tune the pegs of a guitar. As it is currently, the motor doesn't have nearly enough strength to tune a guitar which is quite important for accessibility. 
@@ -36,6 +38,5 @@ Even if it does detect the current pitch and moves based on that due to the lack
 
 ---
 
----
 
 Overall, these challenges shaped the final design of the project and required us to make practical engineering trade-offs between functionality, reliability, and hardware constraints.
