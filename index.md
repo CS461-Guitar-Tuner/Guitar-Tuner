@@ -10,5 +10,5 @@ A brief guide into project journey!
 - [Issues](issues.md)
 - [Ethics](ethics.md)
 - [Accessibility](accessibility.md)
-- [Material](Material.md)
+- [Material](Material.html)
 - [References](references.md)
