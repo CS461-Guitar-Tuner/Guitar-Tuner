@@ -1,7 +1,7 @@
-# Automated Guitar Tuner
 
 **Meet the Team:**  Gerson, Charlie, Edy :P
 
+A brief guide into project journey!
 
 
 ## Project Pages
