@@ -1,4 +1,4 @@
-# Work Schedule 
+# Team Work Schedule 
 
 Week 8: Wait for materials to arrive, preemptively read datasheets, assemble the board. 
 Week 9 & 10: Detect the correct tone, have a fully functional display, make the motor turn the tuning peg. Occasional check-ins to ensure that everything is going smoothly.
