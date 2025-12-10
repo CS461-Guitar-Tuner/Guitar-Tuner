@@ -263,13 +263,18 @@ enum MainState { OFF, WELCOME, SELECT, NORMAL, MOTOR, FORK };
 
 ```cpp
 void sendMotorCommand(float cents) {
-  if (fabs(cents) < IN_TUNE_CENTS) {
-    digitalWrite(MOTOR_EN_PIN, LOW);
+  const float DEAD_ZONE = IN_TUNE_CENTS;
+
+  if (fabs(cents) < DEAD_ZONE) {
+    digitalWrite(MOTOR_EN_PIN, LOW);   // stop motor
     return;
   }
-  digitalWrite(MOTOR_DIR_PIN, (cents < 0) ? HIGH : LOW);
+
+  bool tighten = (cents < 0);  // FLAT => tighten, SHARP => loosen
+  digitalWrite(MOTOR_DIR_PIN, tighten ? HIGH : LOW);
   digitalWrite(MOTOR_EN_PIN, HIGH);
 }
+
 ```
 
 ---
