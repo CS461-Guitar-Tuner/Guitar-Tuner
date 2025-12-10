@@ -2,7 +2,7 @@ Tripoli, S. et al. (2023) Guide for I2C OLED display with Arduino, Random Nerd T
 
 Rembor, K. Adafruit Circuit Playground Bluefruit, Adafruit Learning System. Available at: https://learn.adafruit.com/adafruit-circuit-playground-bluefruit (Accessed: 10 December 2025).
 
-BH4AAW hammond manufacturing | battery products | DigiKey. Available at: https://www.digikey.com/en/products/detail/hammond-manufacturing/BH4AAW/3869836 (Accessed: 10 December 2025).
+BH4AAW hammond manufacturing battery products, DigiKey. Available at: https://www.digikey.com/en/products/detail/hammond-manufacturing/BH4AAW/3869836 (Accessed: 10 December 2025).
 
 Industries, A. DC gearbox motor - ‘Tt motor’ - 200RPM - 3 to 6VDC, adafruit industries blog RSS. Available at: https://www.adafruit.com/product/3777 (Accessed: 10 December 2025).
 
