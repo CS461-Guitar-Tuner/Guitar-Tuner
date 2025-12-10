@@ -149,46 +149,74 @@ The microphone signal is sampled `N_SAMPLES` times using `analogRead()`. The tot
 
 ```cpp
 float measureFrequency() {
-  unsigned long start = micros();
+  // 1) Collect samples and measure sample rate
+  unsigned long start = micros(); //take the first time measurement
   for (int i = 0; i < N_SAMPLES; i++) {
     samples[i] = analogRead(MIC_PIN);
   }
-  unsigned long end = micros();
-
-  float sampleRate = N_SAMPLES / ((end - start) / 1000000.0);
-
+  unsigned long end = micros(); //take the second time measurement 
+ 
+  float totalTimeSec = (end - start) / 1000000.0; //find the total time ellapsed in seconds 
+  if (totalTimeSec <= 0) return 0.0; //mostly a worry if the timer is wrapping around-- just in case
+  float sampleRate = N_SAMPLES / totalTimeSec; //gives us samples per second to be used in frequency calc 
+ 
+  // 2) Remove DC offset and measure signal energy (centering the signal at zero)
   long sum = 0;
-  for (int i = 0; i < N_SAMPLES; i++) sum += samples[i];
-  float mean = sum / (float)N_SAMPLES;
-
-  double energy = 0;
+  for (int i = 0; i < N_SAMPLES; i++) {
+    sum += samples[i]; //tallying up all of the samples so... 
+  }
+  float mean = sum / (float)N_SAMPLES; //mean is where the zero lies 
+  double energy = 0.0; //reminder about what energy 
   for (int i = 0; i < N_SAMPLES; i++) {
     float v = samples[i] - mean;
     samples[i] = (int16_t)v;
     energy += v * v;
   }
-
-  if (sqrt(energy / N_SAMPLES) < 5.0) return 0.0;
-
-  int minLag = sampleRate / 500.0;
-  int maxLag = sampleRate / 60.0;
-
+  float rms = sqrt(energy / N_SAMPLES);
+ 
+  // Simple noise gate so we don't react to nothing
+  if (rms < 5.0) {   // tweak this threshold if needed
+    return 0.0;
+  }
+ 
+  // 3) Difference function in guitar range
+  int minLag = (int)(sampleRate / 500.0); // ~500 Hz upper bound
+  int maxLag = (int)(sampleRate / 60.0);  // ~60 Hz lower bound
+ 
+  if (minLag < 2) minLag = 2;
+  if (maxLag >= N_SAMPLES - 1) maxLag = N_SAMPLES - 2;
+ 
+  float bestLag = -1;
   unsigned long bestDiff = 0xFFFFFFFF;
-  int bestLag = -1;
-
+ 
   for (int lag = minLag; lag <= maxLag; lag++) {
     unsigned long diff = 0;
+ 
     for (int i = 0; i < N_SAMPLES - lag; i++) {
-      int32_t d = samples[i] - samples[i + lag];
-      diff += d * d;
+      int32_t d = (int32_t)samples[i] - (int32_t)samples[i + lag];
+      diff += (unsigned long)(d * d);
     }
+ 
     if (diff < bestDiff) {
       bestDiff = diff;
       bestLag = lag;
     }
   }
-
-  return (bestLag > 0) ? sampleRate / bestLag : 0.0;
+ 
+  if (bestLag <= 0) return 0.0;
+ 
+  float freq = sampleRate / bestLag;
+  return freq;
+}
+ 
+float centsOff(float measured, float target) {
+  return 1200.0 * log(measured / target) / log(2.0);
+}
+ 
+const char* tuningStatus(float cents) {
+  if (fabs(cents) < 5.0)  return "IN TUNE";
+  if (cents < 0)          return "FLAT";
+  return "SHARP";
 }
 ```
 
