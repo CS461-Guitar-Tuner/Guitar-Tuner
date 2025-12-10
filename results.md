@@ -40,6 +40,7 @@ Motor Mode theroetically allows for the user to automatically tune the guitar ba
   <img src="assets/images/Motor.jpg">
 </div>
 
+This is the full setup!
 <div class="img-wrap">
   <img src="assets/images/Guitar_Tuner_Full.jpg" style="width:400px;">
 </div>
