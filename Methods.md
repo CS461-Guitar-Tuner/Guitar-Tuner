@@ -286,12 +286,19 @@ void sendMotorCommand(float cents) {
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Bill of Materials</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
+
 <body>
-  <h1>Bill of Materials</h1>
-  <p><strong>Total budget: $150</strong></p>
+
+  <h2>Bill of Materials</h2>
+
+  <p>
+    These are all the components used throughout the project. 
+    Alligator clips and connecting wires were provided.
+  </p>
+
+  <p><strong>Total budget:</strong> $150</p>
 
   <table border="1" cellspacing="0" cellpadding="6">
     <thead>
@@ -328,13 +335,15 @@ void sendMotorCommand(float cents) {
         <td>$29.95</td>
       </tr>
       <tr>
-        <td><a href="https://www.digikey.com/en/products/detail/hammond-manufacturing/BH4AAW/3869836">4xAA Battery Holder</a></td>
+        <td><a href="https://www.digikey.com/en/products/detail/hammond-manufacturing/BH4AAW/3869836">
+          4xAA Battery Holder</a></td>
         <td>Digi-Key</td>
         <td>1</td>
         <td>$4.65</td>
       </tr>
       <tr>
-        <td><a href="https://learn.adafruit.com/adafruit-circuit-playground-bluefruit">Circuit Playground Bluefruit</a></td>
+        <td><a href="https://learn.adafruit.com/adafruit-circuit-playground-bluefruit">
+          Circuit Playground Bluefruit</a></td>
         <td>Adafruit</td>
         <td>1</td>
         <td>$24.95</td>
@@ -346,12 +355,19 @@ void sendMotorCommand(float cents) {
         <td>$5.95</td>
       </tr>
       <tr>
+        <td><a href="https://www.adafruit.com/product/3000">Circuit Playground Classic</a></td>
+        <td>Adafruit</td>
+        <td>1</td>
+        <td>$19.95</td>
+      </tr>
+      <tr>
         <td><strong>Total</strong></td>
         <td>—</td>
         <td>—</td>
-        <td><strong>$77.35</strong></td>
+        <td><strong>$97.30</strong></td>
       </tr>
     </tbody>
   </table>
 </body>
 </html>
+
