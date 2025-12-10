@@ -40,7 +40,7 @@ A brief guide into our project journey.
 ## Project Pages
 
 - [Introduction](introduction.md)
-- [Materials](Material.md)
+- [Methods](Material.md)
 - [Results](results.md)
 - [Schedule](schedule.md)
 - [Issues](issues.md)
