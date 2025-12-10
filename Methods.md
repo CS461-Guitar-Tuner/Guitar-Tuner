@@ -278,7 +278,8 @@ void sendMotorCommand(float cents) {
 ```
 [Main MCU code](mainMCUcode.ino) |
 [Helper MCU code](helperMCUcode.ino) |
-[View General Pinout](assets/images/tuner_pinout.pdf)
+[View General Pinout](assets/images/tuner_pinout.pdf) |
+[View FSM](assets/images/tuner_fsm.pdf)
 
 ---
 
