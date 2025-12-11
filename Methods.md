@@ -278,7 +278,8 @@ void sendMotorCommand(float cents) {
 [Main MCU code](mainMCUcode.ino) |
 [Helper MCU code](helperMCUcode.ino) |
 [View General Pinout](assets/images/tuner_pinout.pdf) |
-[View FSM](assets/images/tuner_fsm.pdf)
+[View FSM](assets/images/tuner_fsm.pdf) |
+[3-D Peg Turner](motor_to_peg_adaptor.stl)
 
 ---
 
@@ -295,6 +296,7 @@ void sendMotorCommand(float cents) {
   <p>
     These are all the components used throughout the project. 
     Alligator clips and connecting wires were provided.
+    3-D printing was provided by Middlebury College.
   </p>
 
   <p><strong>Total budget:</strong> $150</p>
