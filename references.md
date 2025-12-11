@@ -11,3 +11,14 @@ Industries, A. Mini oval speaker with short wires - 8 ohm 1 watt, adafruit indus
 Industries, A. (no date b) Electret microphone amplifier - Max4466 with adjustable gain, adafruit industries blog RSS. Available at: https://www.adafruit.com/product/1063 (Accessed: 10 December 2025).
 
 ChatGPT.” OpenAI, 2025, https://chat.openai.com/
+
+
+[Introduction](introduction.md) |
+[Methods](Methods.md) |
+[Results](results.md) |
+[Schedule](schedule.md) |
+[Issues](issues.md) |
+[Ethics](ethics.md) |
+[Accessibility](accessibility.md) |
+[References](references.md)
+
