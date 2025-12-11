@@ -44,3 +44,13 @@ This is the full setup!
 <div class="img-wrap">
   <img src="assets/images/Guitar_Tuner_Full.jpg" style="width:400px;">
 </div>
+
+
+[Introduction](introduction.md) |
+[Methods](Methods.md) |
+[Results](results.md) |
+[Schedule](schedule.md) |
+[Issues](issues.md) |
+[Ethics](ethics.md) |
+[Accessibility](accessibility.md) |
+[References](references.md)
