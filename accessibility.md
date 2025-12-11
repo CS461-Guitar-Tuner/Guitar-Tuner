@@ -5,3 +5,13 @@ Accessibility was an important consideration in the design of this project. In a
 The motor-assisted tuning feature would theoretically supports users with limited fine motor control by reducing the need for precise manual adjustments of the tuning pegs. By automating small tuning movements, the device can help make the tuning process more accessible and less physically demanding. With it's current implementation the motor itself is too weak to fully tune the guitar. In the future it is likely a different motor can be used in order to fully rotate the dials on the strings.
 
 Together, these features aim to make the tuner usable by a wider range of players with varying sensory and motor abilities.
+
+
+[Introduction](introduction.md) |
+[Methods](Methods.md) |
+[Results](results.md) |
+[Schedule](schedule.md) |
+[Issues](issues.md) |
+[Ethics](ethics.md) |
+[Accessibility](accessibility.md) |
+[References](references.md)
