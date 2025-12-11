@@ -279,7 +279,8 @@ void sendMotorCommand(float cents) {
 [Helper MCU code](helperMCUcode.ino) |
 [View General Pinout](assets/images/tuner_pinout.pdf) |
 [View FSM](assets/images/tuner_fsm.pdf) |
-[3-D Peg Turner](assets/images/motor_to_peg_adapter.stl)
+<a href="assets/images/motor_to_peg_adapter.stl" download>3-D Peg Turner (.stl)</a>
+
 
 ---
 
