@@ -54,7 +54,7 @@ Use the links below to navigate through the project.
 
 ## Project Pages
 
-[Introduction](introduction.md)
+[Introduction](introduction.md) |
 [Methods](Methods.md) |
 [Results](results.md) |
 [Schedule](schedule.md) |
