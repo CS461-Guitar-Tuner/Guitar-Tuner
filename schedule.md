@@ -75,6 +75,11 @@
   - Lower strings  
   - Higher strings
  
+### **Actuality of the Schedule**
+- In the end our schedule ended up changing dramatically throughout the project. We simply met up when we were available and set goals dependant on the day. For example, we would schedule a meeting on simply learning how to turn on the display and work with making the microphone detect pitch. These meetings ended up being around 2-3 hours dependant on the task. There were times in which we were not able to finish the goal by the meeting so we would disperse and end up doing parts by ourselves. We have a fairly efficient workflow overall, however we did struggle a bit with scheduling things near the end due to underestimating certain tasks. Each of us ended up working on most of the components together, even more than expected.
+- Edy and Gerson focused a lot of the oled, Gerson with figuring how to turn it on alongside the functionality, while Edy worked a lot on the UI and Gerson helped create a lot of the initial states of our machine.
+- The group as a whole didn't figure out whether to use the external microphone or the internal one from the circuit playground till near the end due to the difficulties of making it function with the current setup.
+- A lot of time near the end was spent combining the code from the components together to create two different sketches that functioned together without bugs. 
 
 [Introduction](introduction.md) |
 [Methods](Methods.md) |
