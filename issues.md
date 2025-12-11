@@ -40,3 +40,13 @@ Even if it does detect the current pitch and moves based on that due to the lack
 
 
 Overall, these challenges shaped the final design of the project and required us to make practical engineering trade-offs between functionality, reliability, and hardware constraints.
+
+
+[Introduction](introduction.md) |
+[Methods](Methods.md) |
+[Results](results.md) |
+[Schedule](schedule.md) |
+[Issues](issues.md) |
+[Ethics](ethics.md) |
+[Accessibility](accessibility.md) |
+[References](references.md)
