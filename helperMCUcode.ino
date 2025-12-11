@@ -55,3 +55,13 @@ void loop() {
   // Optional: tiny delay to chill
   // delay(5);
 }
+
+[Introduction](introduction.md) |
+[Methods](Methods.md) |
+[Results](results.md) |
+[Schedule](schedule.md) |
+[Issues](issues.md) |
+[Ethics](ethics.md) |
+[Accessibility](accessibility.md) |
+[References](references.md)
+
