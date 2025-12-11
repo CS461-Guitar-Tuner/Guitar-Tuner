@@ -73,6 +73,17 @@
 - Verify pitch accuracy against a known-good tuner  
 - Test accuracy across different pitch ranges  
   - Lower strings  
-  - Higher strings  
+  - Higher strings
+ 
+
+[Introduction](introduction.md) |
+[Methods](Methods.md) |
+[Results](results.md) |
+[Schedule](schedule.md) |
+[Issues](issues.md) |
+[Ethics](ethics.md) |
+[Accessibility](accessibility.md) |
+[References](references.md)
+
 
 
