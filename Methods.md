@@ -371,3 +371,14 @@ void sendMotorCommand(float cents) {
 </body>
 </html>
 
+
+[Introduction](introduction.md) |
+[Methods](Methods.md) |
+[Results](results.md) |
+[Schedule](schedule.md) |
+[Issues](issues.md) |
+[Ethics](ethics.md) |
+[Accessibility](accessibility.md) |
+[References](references.md)
+
+
