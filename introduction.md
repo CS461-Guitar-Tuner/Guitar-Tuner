@@ -20,3 +20,14 @@ In this mode, the user will select the pitch but also activate a motor to automa
 ### 3. Pitch Fork Tone Mode  
 The user will select the string being tuned and play the corresponding target pitch through a speaker. The user can then tune by ear, matching the guitar string to the generated tone.
 
+
+[Introduction](introduction.md) |
+[Methods](Methods.md) |
+[Results](results.md) |
+[Schedule](schedule.md) |
+[Issues](issues.md) |
+[Ethics](ethics.md) |
+[Accessibility](accessibility.md) |
+[References](references.md)
+
+
