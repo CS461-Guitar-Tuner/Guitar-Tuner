@@ -139,8 +139,7 @@ The microphone signal is sampled `N_SAMPLES` times using `analogRead()`. The tot
    The RMS energy of the signal is computed. If the RMS value is below a threshold, the signal is treated as silence and ignored.
 
 3. **Lag Search (Autocorrelation)**  
-   The algorithm searches over a range of delays (lags) corresponding to roughly 60–500 Hz, which covers the guitar’s frequency range.  
-   For each lag, it computes the sum of squared differences between the signal and a shifted version of itself. The lag with the smallest error represents the signal’s fundamental period.
+   The algorithm searches over a range of delays (lags) corresponding to roughly 60–500 Hz, which covers the guitar’s frequency range.  For each lag, it computes the sum of      squared differences between the signal and a shifted version of itself. The lag with the smallest error represents the signal’s fundamental period.
 
 4. **Frequency Calculation**  
    Frequency is computed as the sample rate divided by the best lag.
