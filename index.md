@@ -1,10 +1,17 @@
 # Guitar Tuner Project
 
-A brief guide into our project journey.
+---
+
+## Welcome
+
+This website contains the documentation for our Guitar Tuner Project.  
+Each page covers a different part or our process.
+
+Use the links below to navigate through the project.
 
 ---
 
-## Meet the Team
+## Meet the Team!
 
 <style>
 .team-table img {
@@ -13,6 +20,9 @@ A brief guide into our project journey.
   object-fit: cover;
   border-radius: 6px;
 }
+.team-table td {
+  padding: 8px 16px;
+}
 </style>
 
 <table class="team-table">
@@ -20,17 +30,17 @@ A brief guide into our project journey.
     <td align="center">
       <img src="assets/images/Gerson.jpg" alt="Gerson" />
       <br />
-      <strong>Gerson</strong>
+      <strong>Gerson H</strong>
     </td>
     <td align="center">
       <img src="assets/images/Charlie.jpg" alt="Charlie" />
       <br />
-      <strong>Charlie</strong>
+      <strong>Charlie G</strong>
     </td>
     <td align="center">
       <img src="assets/images/edy.jpg" alt="Edy" />
       <br />
-      <strong>Edy</strong>
+      <strong>Edy C</strong>
     </td>
     <td align="center">
       <img src="assets/images/professor.jpg" alt="Professor Vaccari" />
@@ -44,7 +54,7 @@ A brief guide into our project journey.
 
 ## Project Pages
 
-[Introduction](introduction.md) |
+[Introduction](introduction.md)
 [Methods](Methods.md) |
 [Results](results.md) |
 [Schedule](schedule.md) |
