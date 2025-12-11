@@ -1,4 +1,4 @@
-# Team Work Schedule
+# Planned Team Work Schedule
 
 ---
 
@@ -74,6 +74,7 @@
 - Test accuracy across different pitch ranges  
   - Lower strings  
   - Higher strings
+---
  
 ### **Actuality of the Schedule**
 - In the end our schedule ended up changing dramatically throughout the project. We simply met up when we were available and set goals dependant on the day. For example, we would schedule a meeting on simply learning how to turn on the display and work with making the microphone detect pitch. These meetings ended up being around 2-3 hours dependant on the task. There were times in which we were not able to finish the goal by the meeting so we would disperse and end up doing parts by ourselves. We have a fairly efficient workflow overall, however we did struggle a bit with scheduling things near the end due to underestimating certain tasks. Each of us ended up working on most of the components together, even more than expected.
